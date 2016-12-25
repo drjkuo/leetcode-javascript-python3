@@ -1,29 +1,29 @@
- * @param {string} haystack
- * @param {string} needle
- * @return {number}
- */
 var strStr = function(haystack, needle) {
-    var hl = haystack.length;
-    var nl = needle.length;
-    
-    if (nl === 0) { return 0; }
-    
-    for (let i=0; i<hl; i=i+1) {
-        // compare string starting from hl[i]...hl[i+nl-1] and needle
-        let tmp = helper(i, haystack, needle); 
-        if (tmp !== -1) { return tmp; }
-    }
-    
-    return -1;
-};
+    return haystack.indexOf(needle); 
+}
 
-var helper = function(si, haystack, needle) {
-    let nl = needle.length;
-    for (let i=0; i<nl; i++) {
-        if (haystack[si+i] !== needle[i]) {
-            return -1;
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     return si;
 }
