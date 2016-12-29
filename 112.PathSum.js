@@ -18,9 +18,7 @@ var hasPathSum = function(root, sum) {
 
 let helper = function(node, remaining) // make sure of end condition
 {
-    if (node.left === null && node.right === null && node.val === remaining) return true;
-    if (node.left === null && node.right === null && node.val !== remaining) return false;
-    if (node.left === null) return Boolean(helper(node.right, remaining - node.val));
-    if (node.right === null) return Boolean(helper(node.left, remaining - node.val));
-    return Boolean(helper(node.left, remaining - node.val) + helper(node.right, remaining - node.val));
+    if (node === null) return false; // if current node is null then terminate
+    if (node.val === remaining && node.left === null && node.right === null) return true; // true condition: node.val && leaf
+    return helper(node.left, remaining - node.val) || helper(node.right, remaining - node.val);
 }
