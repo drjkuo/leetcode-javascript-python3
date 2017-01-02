@@ -2,28 +2,23 @@
  * @param {number[]} nums
  * @return {number}
  */
-var minMoves = function(nums) {
-    let minNums = Math.min(...nums);
-    let nl = nums.length;
-    let ans = 0;
-    for (let i=0; i<nl; i++)
-    {
-        ans += (nums[i] - minNums);
-    }
 
-    return ans;
+// refactor
+var minMoves = function(nums) {
+    // let minNums = Math.min(...nums);
+    let min = Number.MAX_VALUE;
+    let nl = nums.length;
+    let sum = 0;
+    // let sum = nums.reduce(function(a, b) { return a + b;}, 0);
+    for (let i=0; i<nl; i++) {
+        sum += nums[i];
+        min = (nums[i]<min)? nums[i]:min;
+    }
+    // for (let i=0; i<nl; i++)
+    // {
+    //     ans += (nums[i] - minNums);
+    // }
+
+    return sum - min*nl;
 };
 
-/*
-misunderstood the question
-a,b,c //assuming sorted
-a-c,b-c,0 how to make it 0,0,0
-
-after c-b moves, a-b,0,0
--1,0,0 needs 2 moves
--2,0,0 after 2 moves becomes -1,0,0
--3,0,0 after 2 moves becomes -1,1,1(-2,0,0)
--4,0,0 after 2 moves becomes -2,1,1(-3,0,0)
-
-
-*/
