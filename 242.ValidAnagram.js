@@ -3,11 +3,12 @@
  * @param {string} t
  * @return {boolean}
  */
-// Runtime: 119 ms
+// remove redundancy
+// Runtime: 116 ms
 var isAnagram = function(s, t) {
-    let arr1 = s.split("");
+    // let arr1 = s.split("");
     let l1 = s.length;
-    let arr2 = t.split("");
+    // let arr2 = t.split("");
     let l2 = t.length;
     let tmp = {};
 
