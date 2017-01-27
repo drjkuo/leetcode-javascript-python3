@@ -8,7 +8,7 @@
 var toHex = function(num) {
     let map = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"];
     let reverse_ans = [];
-    // let bin = (num >>> 0).toString(2);
+
     if (num === 0) return "0";
     if (num <= 9 && num >= 1) return num.toString();
     while (num !== 0)
@@ -18,11 +18,5 @@ var toHex = function(num) {
     }
 
     return reverse_ans.reverse().join("");
-
-    // while (bin.length !== 0)
-    // {
-
-    // }
-
 };
 
