@@ -1,4 +1,5 @@
 // Runtime: 156 ms; 2%
+// speed up by adding  boundary condition: num <= 9 && num >= 1
 
 /**
  * @param {number} num
@@ -9,6 +10,7 @@ var toHex = function(num) {
     let reverse_ans = [];
     // let bin = (num >>> 0).toString(2);
     if (num === 0) return "0";
+    if (num <= 9 && num >= 1) return num.toString();
     while (num !== 0)
     {
         reverse_ans.push(map[num & 15]);
