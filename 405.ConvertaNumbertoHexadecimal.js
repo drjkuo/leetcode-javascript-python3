@@ -1,50 +1,26 @@
+// Runtime: 156 ms; 2%
+
 /**
  * @param {number} num
  * @return {string}
  */
-
-// bug to fix
 var toHex = function(num) {
-    // let binString = num.toString(2);
-    //push q, and continue to work on r
+    let map = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"];
     let reverse_ans = [];
+    // let bin = (num >>> 0).toString(2);
     if (num === 0) return "0";
-    if (num < 0) num = Math.pow(2,32) - Math.abs(num);
-    while ((num % 16) !== 0)
+    while (num !== 0)
     {
-        if ((num % 16) < 10)
-        {
-            reverse_ans.push(num % 16);
-        }
-        else
-        {
-            switch (num % 16)
-            {
-                case 10:
-                   reverse_ans.push("a");
-                   break;
-                case 11:
-                   reverse_ans.push("b");
-                   break;
-                case 12:
-                   reverse_ans.push("c");
-                   break;
-                case 13:
-                   reverse_ans.push("d");
-                   break;
-                case 14:
-                   reverse_ans.push("e");
-                   break;
-                case 15:
-                   reverse_ans.push("f");
-                   break;
-
-            }
-        }
-        num = Math.floor(num / 16);
+        reverse_ans.push(map[num & 15]);
+        num = num >>> 4;
     }
 
     return reverse_ans.reverse().join("");
-    // return helper(num);
+
+    // while (bin.length !== 0)
+    // {
+
+    // }
+
 };
 
