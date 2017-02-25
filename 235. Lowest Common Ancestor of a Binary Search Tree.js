@@ -1,22 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
 var lowestCommonAncestor = function(root, p, q) {
-    var arr1 = helper(root, p);
-    var arr2 = helper(root, q);
+    return dfs(root, p, q);
 };
 
-var arr = [];
-var helper = function(root, p) { // return an array showing the path from root to node p
-    if (root.val === p.val) {
-        arr.push(root.val);
-        return arr;
-    }
+var dfs = function(node, p, q) {
+  if ((p.val > node.val) && (q.val > node.val)) {
+      return dfs(node.right, p, q);
+  }
 
-    if (root.val > p.val) {
-        arr.push(root.val);
-        helper(root.left, p);
-    }
+  if ((p.val < node.val) && (q.val < node.val)) {
+      return dfs(node.left, p, q);
+  }
 
-    if (root.val < p.val) {
-        arr.push(root.val);
-        helper(root.right, p);
-    }
-}
+  return node;
+
+
+};
