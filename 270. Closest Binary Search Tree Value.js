@@ -12,7 +12,7 @@
  */
 
 var minABS = Number.MAX_SAFE_INTEGER;
-var ans = [];
+var ans;
 
 var closestValue = function(root, target) {
     dfs(root, target);
