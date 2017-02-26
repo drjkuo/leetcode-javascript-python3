@@ -10,30 +10,33 @@
  * @param {number} target
  * @return {number}
  */
+
+var minABS = Number.MAX_SAFE_INTEGER;
+var ans = [];
+
 var closestValue = function(root, target) {
     dfs(root, target);
-    //console.log(arr);
-    var minabs = Number.MAX_SAFE_INTEGER,
-        minindex;
-    for (var i=0; i<arr.length; i++) {
-        if (Math.abs(arr[i]-target) < minabs) {
-            minabs = Math.abs(arr[i]-target);
-            minindex = i;
-        }
-    }
-
-    return arr[minindex];
-
+    return ans;
 };
 
-var arr = []
+
 var dfs = function(root, target) {
     if (root === null) return;
-    arr.push(root.val);
+
     if (root.val > target) {
+        if (Math.abs(root.val-target) < minABS) {
+            minABS = Math.abs(root.val-target);
+            ans = root;
+        }
         dfs(root.left, target);
     }
-    else {
+
+    else { // root.val < target
+        if (Math.abs(root.val-target) < minABS) {
+            minABS = Math.abs(root.val-target);
+            ans = root;
+        }
         dfs(root.right, target);
     }
-}
+};
+
