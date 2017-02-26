@@ -26,7 +26,7 @@ var dfs = function(root, target) {
     if (root.val > target) {
         if (Math.abs(root.val-target) < minABS) {
             minABS = Math.abs(root.val-target);
-            ans = root;
+            ans = root.val;
         }
         dfs(root.left, target);
     }
@@ -34,7 +34,7 @@ var dfs = function(root, target) {
     else { // root.val < target
         if (Math.abs(root.val-target) < minABS) {
             minABS = Math.abs(root.val-target);
-            ans = root;
+            ans = root.val;
         }
         dfs(root.right, target);
     }
