@@ -1,0 +1,91 @@
+1) Invert a binary tree.
+Input:
+         4
+       /   \
+      2     7
+     / \   / \
+    1   3 6   9
+
+Output:
+         4
+      /   \
+      7     2
+     / \   / \
+    9   6 3   1
+
+function invertTree(root) {
+  if (root) {   //if root !== null
+    left = root.left;
+    right = root.right;
+    //swap left and right
+    var tmp = left;
+    left = right;
+    right = tmp;
+    //then invert subtrees
+    invertTree(left);
+    invertTree(right);
+  }
+}
+
+
+
+2) Given a undirected graph with weights, return the sum of the weight of each path between two nodes (shortest path between two vertices). Assume there are no cycles.
+
+Example:
+
+
+Input:
+       A
+       | 1
+       B
+   2 /   \ 3
+    C     D
+
+Output:
+18
+since
+A to B has weight 1
+A to C has weight 3
+A to D has weight 4
+B to C has weight 2
+B to D has weight 3
+C to D has weight 5
+
+3) Write an iterative function to implement preorder traversal on a given binary tree
+(note that recursion algorithm is not used here), and return the node values in an array.
+//root, left, right
+//if stack is not empty, pop the top and push right and left nodes of the popped
+
+function preorderIterative (root) {
+  if (root === null) return null;
+
+  var stack = [];
+  var ans = [];
+  var tmpNode;
+  stack.push(root);
+  while (stack.length > 0) {
+    tmpNode = stack.pop();
+    ans.push(tmpNode.val);
+    if (tmpNode.right !== null) stack.push(tmpNode.right);
+    if (tmpNode.left !== null) stack.push(tmpNode.left);
+
+  }
+
+  return ans;
+}
+
+
+
+4) Do a breadth first search traversal given a tree (may not be a binary tree).
+
+Example:
+        j
+     /   \    \
+    f      k   i
+  /   \      \
+ a     h      z
+  \
+   d
+
+Output: j f k i a h z d
+
