@@ -1,4 +1,7 @@
 //test at Neolife
+//fixing github ssh bug
+//bugs
+
 
 1) Invert a binary tree.
 Input:
@@ -90,4 +93,3 @@ Example:
    d
 
 Output: j f k i a h z d
-
