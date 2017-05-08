@@ -8,7 +8,7 @@ var numIslands = function(grid) {
     var rowlen = g.length;
     var collen = g[0].length;
     var result = 0;
-    var q = [];
+    //var q = [];
     // console.log(typeof g[0][0]);
     for (var i=0; i<rowlen; i++) {
        for (var j=0; j<collen; j++) {
@@ -16,26 +16,40 @@ var numIslands = function(grid) {
                result++;
             //   console.log([i,j]);
             //   q.push([i,j]);
-               BFS(i,j,g,rowlen,collen,q);
+            // g[i][j] = g[i][j].replace("1","0");
+               BFS(i,j,g,rowlen,collen);
            }
        }
     }
     return result;
 };
 
-function BFS(i,j,g,rowlen,collen,q) {
+function BFS(i,j,g,rowlen,collen) {
+    var q = [];
     q.push([i,j]);
-    // g[i][j] = g[i][j].replace("1","0");
+    g[i][j] = g[i][j].replace("1","0");
     while (q.length > 0) {
         var tmp = q.shift();
         // console.log(tmp);
         i = tmp[0];
         j = tmp[1];
-        g[i][j] = g[i][j].replace("1","0");
-        if ((i+1)<=rowlen-1 && g[i+1][j] === '1') q.push([i+1, j]);
-        if ((i-1)>=0 && g[i-1][j] === '1') q.push([i-1, j]);
-        if ((j+1)<=collen-1 && g[i][j+1] === '1') q.push([i, j+1]);
-        if ((j-1)>=0 && g[i][j-1] === '1') q.push([i, j-1]);
+        // g[i][j] = g[i][j].replace("1","0");
+        if ((i+1)<=rowlen-1 && g[i+1][j] === '1') {
+            q.push([i+1, j]);
+            g[i+1][j] = g[i+1][j].replace("1","0");
+        }
+        if ((i-1)>=0 && g[i-1][j] === '1') {
+            q.push([i-1, j]);
+            g[i-1][j] = g[i-1][j].replace("1","0");
+        }
+        if ((j+1)<=collen-1 && g[i][j+1] === '1') {
+            q.push([i, j+1]);
+            g[i][j+1] = g[i][j+1].replace("1","0");
+        }
+        if ((j-1)>=0 && g[i][j-1] === '1') {
+            q.push([i, j-1]);
+            g[i][j-1] = g[i][j-1].replace("1","0");
+        }
     }
     return;
 
