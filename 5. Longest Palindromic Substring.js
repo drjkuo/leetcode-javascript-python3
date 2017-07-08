@@ -2,35 +2,36 @@
  * @param {string} s
  * @return {string}
  */
+
+var ans="";
+
 var longestPalindrome = function(s) {
-    var maxLen = 1;
-    var maxStart = 0;
-    var maxEnd = 0;
+
     for (var i = 0; i < s.length; i++) {
-        var [tmpStart, tmpEnd, tmpLen] = checkPalindrome(s, i);
-        // console.log(i);
-        console.log(i,tmpStart, tmpEnd, tmpLen);
-        if ( tmpLen > maxLen) {
-            maxStart = tmpStart;
-            maxEnd = tmpEnd;
+        onePalindrome (s, i, i);
+        console.log('single',ans);
+    }
+
+    for (var i = 0; i < s.length - 1; i++) {
+        if (s[i] === s[i+1]) {
+            onePalindrome (s, i, i+1);
+            console.log(ans);
         }
     }
 
-    return s.substring(maxStart, maxEnd+1);
+    return ans;
 };
 
-function checkPalindrome (s, index) {
-    var len = s.length;
-    var start = 0;
-    var end = 0;
-    for (var i = 0; (index + i) <= len-1 && (index - i) >= 0; i++) {
-        if (s[index+i] === s[index-i]) {
-            start = index - i;
-            end = index + i;
-        }
-        else {
-            break;
-        }
+function onePalindrome (s, start, end) {
+    while (start >=0 && end < s.length && s[start] === s[end]) {
+        start--;
+        end++;
     }
-    return [start, end, end-start+1];
+
+    var cur = s.substring(start+1, end);
+
+    if (cur.length > ans.length) {
+        ans = cur.slice();
+    }
+
 }
