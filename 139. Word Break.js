@@ -4,35 +4,21 @@
  * @return {boolean}
  */
 var wordBreak = function(s, wordDict) {
-
+    // var start = 0;
     if (wordDict.length === 0) return false;
+    var wordSet = new Set(wordDict);
+    var dp = [];
+    dp[0] = true;
 
-    return helper(wordDict, 0, s);
+    for(var i=0; i<=s.length; i++) {
+        for (var j=0; j<i; j++) {
+            if (dp[j] && wordSet.has(s.substring(j,i))) {
+                dp[i] = true;
+                break;
+            }
+        }
+    }
 
+    return dp[s.length] === true;
 
 };
-
-function helper(wordDict, start, s) {
-
-    if (start === s.length) {
-        return true;
-    }
-    var idx;
-    // var err = 0;
-    for (var i=0; i<wordDict.length; i++) {
-        console.log('start:', start);
-        idx = s.substring(start).indexOf(wordDict[i]);
-        console.log(wordDict[i]);
-        console.log(idx, ";", idx+ (wordDict[i]).length);
-        if (idx === 0) {
-            return helper(wordDict, start+idx+(wordDict[i]).length, s);
-        }
-        else {
-            // err++;
-            continue;
-        }
-    }
-
-    return false;
-
-}
