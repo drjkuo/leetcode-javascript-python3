@@ -4,37 +4,35 @@
  * @return {boolean}
  */
 var wordBreak = function(s, wordDict) {
-    var results = [];
-    if (wordDict.length === 0) return false;
-    // if (helper(wordDict, "", s)) return true;
 
-    helper(wordDict, "", s, results);
-    for (var i=0; i<results.length; i++) {
-        if (results[i] === s)
-            return true;
+    if (wordDict.length === 0) return false;
+
+    return helper(wordDict, 0, s);
+
+
+};
+
+function helper(wordDict, start, s) {
+
+    if (start === s.length) {
+        return true;
+    }
+    var idx;
+    // var err = 0;
+    for (var i=0; i<wordDict.length; i++) {
+        console.log('start:', start);
+        idx = s.substring(start).indexOf(wordDict[i]);
+        console.log(wordDict[i]);
+        console.log(idx, ";", idx+ (wordDict[i]).length);
+        if (idx === 0) {
+            return helper(wordDict, start+idx+(wordDict[i]).length, s);
+        }
+        else {
+            // err++;
+            continue;
+        }
     }
 
     return false;
-};
 
-function helper(wordDict, oneAns, s, results) {
-    // if oneAns.join("") ===
-    // console.log(typeof oneAns);
-    if (oneAns.length === s.length) {
-        results.push(oneAns);
-        return;
-    }
-
-    if (oneAns.length > s.length) {
-        return;
-    }
-
-    for (var i=0; i<wordDict.length; i++) {
-        // var tmpWordDict = wordDict.slice(); //.splice(i,1);
-        // var tmpAns = oneAns.slice();
-        var tmpAns = oneAns + wordDict[i];
-        // console.log(tmpAns);
-        helper(wordDict, tmpAns, s, results);
-
-    }
 }
