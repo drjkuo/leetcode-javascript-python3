@@ -21,9 +21,5 @@ var mySqrt = function(x) {
             return mid;
         }
     }
-
-    if ((start*start) <= x) {
-        return start;
-    }
-
+    return start;
 };
