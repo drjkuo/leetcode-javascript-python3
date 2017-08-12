@@ -12,19 +12,19 @@
  * @return {TreeNode}
  */
 var lowestCommonAncestor = function(root, p, q) {
-    return dfs(root, p, q);
-};
-
-var dfs = function(node, p, q) {
-  if ((p.val > node.val) && (q.val > node.val)) {
-      return dfs(node.right, p, q);
-  }
-
-  if ((p.val < node.val) && (q.val < node.val)) {
-      return dfs(node.left, p, q);
-  }
-
-  return node;
-
+    while(1) {
+        if (p.val === root.val || q.val === root.val) {
+            return root;
+        }
+        else if (p.val > root.val && q.val > root.val) {
+            root = root.right;
+        }
+        else if (p.val < root.val && q.val < root.val) {
+            root = root.left;
+        }
+        else {
+            return root;
+        }
+    }
 
 };
