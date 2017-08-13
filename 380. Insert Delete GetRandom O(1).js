@@ -5,6 +5,7 @@
 
 var RandomizedSet = function() {
     this.hash = {};
+    this.arr = [];
     return null;
 };
 
@@ -14,8 +15,9 @@ var RandomizedSet = function() {
  * @return {boolean}
  */
 RandomizedSet.prototype.insert = function(val) {
-    if (!this.hash.hasOwnProperty(val)) {
+    if (this.arr.indexOf(val) === -1) {
         this.hash[val] = 1;
+        this.arr.push(val);
         return true;
     }
     else {
@@ -30,8 +32,9 @@ RandomizedSet.prototype.insert = function(val) {
  * @return {boolean}
  */
 RandomizedSet.prototype.remove = function(val) {
-    if (this.hash[val] !== undefined) {
+    if (this.arr.indexOf(val) > -1) {
         delete this.hash[val];
+        this.arr.splice(this.arr.indexOf(val), 1);
         return true;
     }
     return false;
@@ -42,11 +45,9 @@ RandomizedSet.prototype.remove = function(val) {
  * @return {number}
  */
 RandomizedSet.prototype.getRandom = function() {
-    if (Object.keys(this.hash).length === 0) return null;
-    var keys = Object.keys(this.hash);
-    var index = Math.floor(keys.length * Math.random());
-    console.log(index);
-    return this.hash[keys[index]];
+    if (this.arr.length === 0) return null;
+    var index = Math.floor(Math.random() * this.arr.length);
+    return this.arr[index];
 };
 
 /**
