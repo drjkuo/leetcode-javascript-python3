@@ -32,12 +32,16 @@ RandomizedSet.prototype.insert = function(val) {
  */
 RandomizedSet.prototype.remove = function(val) {
     if (this.hash.hasOwnProperty(val)) {
-        var index = this.hash[val];
-        var last = this.arr.pop();
-        // this.arr.splice(index, 1, last); // update arr
-        if (index < this.arr.length) {
-            this.arr[index] = last;
+        // if toBeRemove is not the last
+        if ((this.arr.length-1) !== this.hash[val]) {
+            var index = this.hash[val];
+            var last = this.arr.pop();
+            this.arr[index] = last; // update arr
             this.hash[last] = index; // update hash
+        }
+        // if toBeRemove is the last
+        else {
+            this.arr.pop();
         }
         delete this.hash[val];
         return true;
