@@ -35,8 +35,10 @@ RandomizedSet.prototype.remove = function(val) {
         var index = this.hash[val];
         var last = this.arr.pop();
         // this.arr.splice(index, 1, last); // update arr
-        this.arr[index] = last;
-        this.hash[last] = index; // update hash
+        if (index < this.arr.length) {
+            this.arr[index] = last;
+            this.hash[last] = index; // update hash
+        }
         delete this.hash[val];
         return true;
     }
