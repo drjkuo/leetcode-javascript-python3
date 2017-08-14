@@ -15,15 +15,14 @@ var RandomizedSet = function() {
  * @return {boolean}
  */
 RandomizedSet.prototype.insert = function(val) {
-    if (this.arr.indexOf(val) === -1) {
-        this.hash[val] = 1;
+    if (!this.hash.hasOwnProperty(val)) {
+        this.hash[val] = this.arr.length;
         this.arr.push(val);
         return true;
     }
     else {
         return false;
     }
-
 };
 
 /**
@@ -32,9 +31,13 @@ RandomizedSet.prototype.insert = function(val) {
  * @return {boolean}
  */
 RandomizedSet.prototype.remove = function(val) {
-    if (this.arr.indexOf(val) > -1) {
+    if (this.hash.hasOwnProperty(val)) {
+        var index = this.hash[val];
+        var last = this.arr.pop();
+        // this.arr.splice(index, 1, last); // update arr
+        this.arr[index] = last;
+        this.hash[last] = index; // update hash
         delete this.hash[val];
-        this.arr.splice(this.arr.indexOf(val), 1);
         return true;
     }
     return false;
