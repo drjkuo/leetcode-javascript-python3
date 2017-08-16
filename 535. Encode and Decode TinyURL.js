@@ -33,7 +33,7 @@ var encode = function(longUrl) {
  * @return {string}
  */
 var decode = function(shortUrl) {
-    var id = shortUrl.substr(shortUrl.indexOf("com/")+4);
+    var id = shortUrl.replace("http://tinyurl.com/","");
     console.log(id);
     return hash[id];
 };
