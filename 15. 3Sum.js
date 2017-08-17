@@ -12,8 +12,10 @@ var threeSum = function(nums) {
     var ans = [];
     // shift 1st number, and check whether its right-hand numbers produces a corresponding two sum
     for (var i=0; i<nums.length-2; i++) {
+        // add this to speed up!!!
+        if (nums[i] === nums[i-1]) continue;
+
         var tmp = twoSum(-nums[i], i+1, nums.length-1);
-        // console.log(tmp);
         var tmpLen = tmp.length;
         if (tmpLen === 0) continue;
         for (var j=0; j<tmpLen; j++) {
