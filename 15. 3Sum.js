@@ -17,8 +17,22 @@ var threeSum = function(nums) {
             ans.push([nums[i], nums[tmp[0]], nums[tmp[1]]]);
         }
     }
-    return ans;
 
+    return removeDup(ans);
+
+
+    function removeDup(arr) {
+        var hash = {};
+        for (var i=0; i<arr.length; i++) {
+            hash[arr[i]] = arr[i];
+        }
+
+        var ans2 = [];
+        for (var i in hash) {
+            ans2.push(hash[i]);
+        }
+        return ans2;
+    }
 
     // two sum helper func
     function twoSum (target, start, end) {
