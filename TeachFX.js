@@ -115,6 +115,13 @@ function makeComplete(input, max_depth) {
 // n= len(string)
 // O(2^k*n)
 
+// Jim's edit
+// a = # of answers
+// The complexity of makeComplete() starting from line 101 shall be O(2^k + a*n) rather than O(2^k*n) 
+// because the for loop runs ans.length times and is not coupled to helper()
+
+
+
 // '(****)', 1
 
 function helper(tmp, indexToBeSet, cnt, ans) { // ['(', '*','*',')'] , 1
