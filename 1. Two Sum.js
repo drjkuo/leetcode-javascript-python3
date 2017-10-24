@@ -11,8 +11,9 @@ var twoSum = function(nums, target) {
 
     for (i=0; i<nums.length; i++) {
         if (hash[target-nums[i]] > 0) {
-            return [i, hash[target-nums[i]]];
+            return [ i, hash[target-nums[i]] ];
         }
     }
+
 
 };
