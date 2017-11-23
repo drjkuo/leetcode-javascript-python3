@@ -10,7 +10,12 @@
  * @return {TreeNode}
  */
 var invertTree = function(root) {
-    if (root === null || (root.left === null && root.right === null)) return root;
+    helper(root);
+    return root;
+};
+
+function helper (root) {
+    if (root === null || (root.left === null && root.right === null)) return;
 
     // root is not null
     if (root.left && root.right) {
@@ -19,22 +24,20 @@ var invertTree = function(root) {
         root.right = tmp;
         invertTree(root.left);
         invertTree(root.right);
-        return root;
+        return;
     }
 
     if (root.left) {
         root.right = root.left;
         root.left = null;
         invertTree(root.right);
-        return root;
+        return;
     }
 
     if (root.right) {
         root.left = root.right;
         root.right = null;
         invertTree(root.left);
-        return root;
+        return;
     }
-
-
-};
+}
