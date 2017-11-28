@@ -13,13 +13,9 @@ var reverseWords = function(str) {
         if (str[pointer] === " " || pointer === str.length) {
             reverse(str, head, pointer-1);
             head = pointer+1;
-            pointer++;
         }
-        else {
-            pointer++;
-        }
+        pointer++;
     }
-    console.log(head,pointer);
 };
 
 function reverse (str, start, end) {
