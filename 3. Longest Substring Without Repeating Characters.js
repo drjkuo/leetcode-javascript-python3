@@ -6,24 +6,18 @@ var lengthOfLongestSubstring = function(s) {
     if (s.length === 0) return 0;
     var ans = 1;
     var hash = {};
-    for (var i=0; i<s.length; i++) {
-        hash[s[i]] = 1;
-        var j=i+1;
-        while (j<s.length && checkRepeat(s[j])) {
-            j++;
+    var left = 0;
+    for (var right = 0; right<s.length; right++) {
+        var ch = s[right];
+        if (hash[ch] !== undefined) { // repeat
+            left = Math.max(left, hash[s[right]]+1);
+            ans = Math.max(ans, right - left);
         }
-        ans = Math.max(ans, j-i); // j-1-i+1
-    }
-
-    function checkRepeat(ch) {
-        if (hash[ch]) {
-            hash = {};
-            return false;
-        }
-        else {
-            hash[ch] = 1;
-            return true;
-        }
+        // else { // no repeat
+        //     hash[s[right]] = right;
+        // }
+        hash[s[right]] = right;
+        ans = Math.max(ans, right-left+1);
     }
 
     return ans;
