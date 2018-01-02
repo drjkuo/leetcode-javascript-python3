@@ -1,3 +1,32 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+    if (head === null) return null;
+
+    var cur, prev;
+    cur = head;
+    prev = null;
+
+    while(cur !== null) {
+        var next = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = next;
+    }
+
+    return prev;
+
+};
+
 /*
 Java sol
 
