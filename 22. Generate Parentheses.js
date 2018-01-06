@@ -1,38 +1,33 @@
 /**
-* @param {number} n
-* @return {string[]}
-*/
+ * @param {number} n
+ * @return {string[]}
+ */
 var generateParenthesis = function(n) {
-    var result = [];
-    helper("", result, n, 0, 0);
-    return result;
+    var ans = [];
+    helper([], ans, 0, 0, n, 0);
+    return ans;
 };
 
-function helper(oneAns, result, n, numLeft, numRight) {
-    // terminate condition: string.length
-    if (oneAns.length === n*2) {
-        result.push(oneAns);
+function helper(oneAns, ans, left, right, n, curLen) {
+    // console.log(oneAns, ans);
+    if (curLen === n*2 ) {
+        var oneAnsStr = oneAns.slice().join("");
+        ans.push(oneAnsStr);
+        return;
     }
-    // concat “(“ first
+
     var tmp = oneAns.slice();
-    //If the number “(“ is less than n, then tmp += “(“;
-    if (numLeft < n) {
-        tmp += "(";
-        numLeft += 1;
-        helper(tmp, result, n, numLeft, numRight);
-        numLeft -= 1;
+    // left === right
+    if (left < n) {
+        tmp.push("(");
+        helper(tmp, ans, left+1, right, n, curLen+1);
+        tmp.pop();
     }
 
-    //helper ( “(“, [], 3, 1, 0);
-
-    // concat “)”
-    tmp = oneAns.slice();
-    //If the number “(“ is greater than “)”, then tmp += “)“;
-    if (numLeft > numRight) {
-        tmp += ")";
-        numRight += 1;
-        helper(tmp, result, n, numLeft, numRight);
+    // left > right
+    if (left > right) {
+        tmp.push(")");
+        helper(tmp, ans, left, right+1, n, curLen+1);
     }
-    numRight -= 1;
-    //helper ( ““, [], 3, 0, 0);
+
 }
