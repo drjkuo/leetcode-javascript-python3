@@ -11,6 +11,7 @@ var permute = function(nums) {
 function helper (oneAns, ans, nums, visited, curLen) {
     if (curLen === nums.length) {
         ans.push(oneAns.slice());
+        return;
     }
 
     for (var i=0; i<nums.length; i++) {
