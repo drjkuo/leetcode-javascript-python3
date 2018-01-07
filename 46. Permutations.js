@@ -16,12 +16,12 @@ function helper (oneAns, ans, nums, visited, curLen) {
 
     for (var i=0; i<nums.length; i++) {
         var num = nums[i];
-        if (visited[i] !== undefined) continue;
+        if (visited[i] === true) continue;
 
-        var tmp = oneAns.slice();
-        tmp.push(num);
-        var tmp2 = visited.slice();
-        tmp2[i] = true;
-        helper(tmp, ans, nums, tmp2, curLen+1);
+        oneAns.push(num);
+        visited[i] = true;
+        helper(oneAns, ans, nums, visited, curLen+1);
+        oneAns.pop();
+        visited[i] = false;
     }
 }
