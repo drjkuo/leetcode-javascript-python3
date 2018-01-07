@@ -14,12 +14,13 @@ function helper (oneAns, ans, nums, visited, curLen) {
     }
 
     for (var i=0; i<nums.length; i++) {
-        if (visited.indexOf(nums[i]) !== -1) continue;
+        var num = nums[i];
+        if (visited[i] !== undefined) continue;
 
         var tmp = oneAns.slice();
-        tmp.push(nums[i]);
+        tmp.push(num);
         var tmp2 = visited.slice();
-        tmp2.push(nums[i]);
+        tmp2[i] = true;
         helper(tmp, ans, nums, tmp2, curLen+1);
     }
 }
