@@ -3,28 +3,32 @@
  * @return {number[]}
  */
 var productExceptSelf = function(nums) {
-    var scanFromLeft = [];
-    var scanFromRight = [];
+    if (nums.length <= 1) return nums;
 
-    var i;
-    var product = 1;
-    scanFromLeft.push(1);
-    for (i=1; i<nums.length; i++) {
-        product *= nums[i-1];
-        scanFromLeft.push(product);
+    var leftToRight = [];
+    leftToRight.push(1);
+    var product=1;
+    for (var i=1; i<nums.length; i++) {
+        product = nums[i-1]*product;
+        leftToRight.push(product);
+    }
+    console.log(leftToRight);
+
+    var rightToLeft = [];
+    rightToLeft.push(1);
+    product=1;
+    for (var i=1; i<nums.length; i++) {
+        product = nums[nums.length-i]*product;
+        rightToLeft.push(product);
+    }
+    console.log(rightToLeft);
+
+    for (var i=0; i<nums.length; i++) {
+        leftToRight[i] = leftToRight[i] * rightToLeft[nums.length-i-1];
     }
 
-    product = 1;
-    scanFromRight.unshift(1);
-    for (i=(nums.length-1)-1; i>=0; i--) {
-        product *= nums[i+1];
-        scanFromRight.push(product);
-    }
+    return leftToRight;
 
-    var ans = [];
-    for (i=0; i<nums.length; i++) {
-        ans.push(scanFromLeft[i]*scanFromRight[nums.length-1-i])
-    }
 
-    return ans;
+
 };
