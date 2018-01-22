@@ -16,8 +16,7 @@ var isValid = function(s) {
             return false;
         }
     }
-    if (stack.length > 0) return false;
-    return true;
+    return (stack.size() == 0);
 };
 
 /*
