@@ -56,23 +56,78 @@ function BFS(i,j,g,rowlen,collen) {
 }
 
 
-// function DFS(i,j,g,rowlen, collen) {
-//     if (g[i][j] === '1') {
-//         g[i][j] = g[i][j].replace('1', '0');
-//         console.log(i,j);
-//         console.log(g[i][j]);
-//         // console.log(g[p[0]][p[1]]);
-//         if ((i+1) <= rowlen-1) {
-//             DFS(i+1,j,g,rowlen, collen);
-//         }
-//         if ((i-1) >= 0) {
-//             DFS(i-1,j,g,rowlen, collen);
-//         }
-//         if ((j+1) <= collen-1) {
-//             DFS(i,j+1,g,rowlen, collen);
-//         }
-//         if ((j-1) >= 0) {
-//             DFS(i,j-1,g,rowlen, collen);
-//         }
-//     }
-// }
+class Solution {
+    public int numIslands(char[][] grid) {
+        int n = grid.length;
+        if (n == 0 ) return 0;
+        int m = grid[0].length;
+        if (m == 0) return 0;
+
+        UnionFind UF = new UnionFind(n*m);
+
+        int init_count = 0;
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<m; j++) {
+                if (grid[i][j] == '1') init_count++;
+            }
+        }
+        UF.SetCount(init_count);
+
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<m; j++) {
+                if (grid[i][j] == '1') {
+                    // left
+                    if (j>0 && grid[i][j-1] == '1') UF.Union(m*i+j, m*i+j-1);
+                    // right
+                    if (j<m-1 && grid[i][j+1] == '1') UF.Union(m*i+j, m*i+j+1);
+                    // up
+                    if (i>0 && grid[i-1][j] == '1') UF.Union(m*i+j, m*(i-1)+j);
+                    // down
+                    if (i<n-1 && grid[i+1][j] == '1') UF.Union(m*i+j, m*(i+1)+j);
+                }
+            }
+        }
+
+        return UF.GetCount();
+
+    }
+
+}
+
+class UnionFind {
+    private int[] p;
+    private int count;
+
+    public UnionFind(int number) {
+        p = new int[number];
+        for(int i=0; i<number; i++) {
+            p[i] = i;
+        }
+    }
+
+    public int Find(int x) {
+        if (x != p[x])
+            p[x] = Find(p[x]);
+
+        return p[x];
+    }
+
+    public void Union(int x, int y) {
+        int rootx = Find(x);
+        int rooty = Find(y);
+        if (rootx != rooty ) {
+            p[rootx] = rooty;
+            count--;
+        }
+
+    }
+
+    public int GetCount () {
+        return count;
+    }
+
+    public void SetCount(int x) {
+        count = x;
+    }
+
+}
