@@ -46,5 +46,38 @@ var isBalanced = function(root) {
 
 function getHeight(root) {
     if (root === null) return 0;
-    return Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+    var leftH = getHeight(root.left);
+    var rightH = getHeight(root.right);
+    if
+
+    return Math.max(leftH, rightH) + 1;
 }
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+
+var isBalanced = function(root) {
+    if (root === null) return true;
+    var flag = true;
+    getHeight(root);
+    return flag;
+
+    function getHeight(root) {
+        if (root === null) return 0;
+        var leftH = getHeight(root.left);
+        var rightH = getHeight(root.right);
+
+        if (Math.abs(leftH - rightH) > 1) flag = false;
+
+        return Math.max(leftH, rightH) + 1;
+    }
+};
