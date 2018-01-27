@@ -17,3 +17,23 @@ var removeDuplicates = function(nums) {
 
     return ans;
 };
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    var len = nums.length;
+    if (len <= 1) return len;
+
+    var times = 0;
+    for (var i=1; i<len; i++) {
+        if (nums[i-times] === nums[i-1-times]) {
+            nums.splice(i-times,1);
+            nums.push(nums[i-1-times]);
+            times += 1;
+        }
+    }
+    return len-times;
+};
