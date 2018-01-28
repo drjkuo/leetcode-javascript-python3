@@ -7,13 +7,13 @@ var ride = [
          brownie: 1
       }
    },
-   // {
-   //    time: [700, 720],
-   //    item: {
-   //       apple: 2,
-   //       brownie: 1
-   //    }
-   // },
+   {
+      time: [700, 730],
+      item: {
+         apple: 2,
+         brownie: 1
+      }
+   },
    {
       time: [710, 800],
       item: {
@@ -41,7 +41,7 @@ function process_ride(ride) {
    var sortedEvents = [];
    var i, j, tmp;
    for (i=0; i<ride.length; i++) {
-      tmp = new Object({
+      tmp = deepClone({
          se: true,
          time: ride[i].time[0],
          // item: new Object(ride[i].item)
@@ -50,7 +50,7 @@ function process_ride(ride) {
       });
       sortedEvents.push(tmp);
       // tmp = {};
-      tmp = new Object({
+      tmp = deepClone({
          se: false,
          time: ride[i].time[1],
          item: deepClone(ride[i].item)
@@ -72,13 +72,15 @@ sortedEvents = process_ride(ride)
 
 // var i, j;
 var SELen = sortedEvents.length;
-for (let i=0; i<SELen; i++) {
+for (let i=0; i<sortedEvents.length; i++) {
    // merge same-time events
-   for (let j=i+1; j<SELen; j++) {
+   for (let j=i+1; j<sortedEvents.length; j++) {
       if ((sortedEvents[i].time === sortedEvents[j].time) && (sortedEvents[i].se === sortedEvents[j].se)) {
          console.log(sortedEvents[i], sortedEvents[j]);
          sortedEvents[i] = merge(sortedEvents[i], sortedEvents[j], true);
          console.log("merged");
+         sortedEvents.splice(j, 1);
+         j--;
          console.log(sortedEvents[i], sortedEvents[j]);
          // console.log(sortedEvents[i], sortedEvents[j]);
       }
@@ -89,16 +91,16 @@ for (let i=0; i<SELen; i++) {
 }
 console.log(sortedEvents);
 
-var result = [];
-var curSum = {};
-for (let i=0; i<SELen; i++) {
-   console.log("before", curSum);
-   curSum.item = deepClone(merge(curSum, sortedEvents[i], sortedEvents[i]["se"])).item;
-   curSum.time = sortedEvents[i].time;
-   console.log("each", curSum);
-   result.push(deepClone(curSum));
-}
-console.log("result!!", result);
+// var result = [];
+// var curSum = {};
+// for (let i=0; i<SELen; i++) {
+//    console.log("before", curSum);
+//    curSum.item = deepClone(merge(curSum, sortedEvents[i], sortedEvents[i]["se"])).item;
+//    curSum.time = sortedEvents[i].time;
+//    console.log("each", curSum);
+//    result.push(deepClone(curSum));
+// }
+// console.log("result!!", result);
 
 // console.log(sortedEvents);
 // console.log(
