@@ -89,17 +89,16 @@ for (let i=0; i<SELen; i++) {
 }
 console.log(sortedEvents);
 
-// var result = [];
-// var curSum = {};
-// for (let i=0; i<SELen; i++) {
-//    console.log("before", curSum);
-//    curSum = deepClone(merge(curSum, sortedEvents[i], sortedEvents[i]["se"]));
-//    curSum.time = sortedEvents[i].time;
-//    console.log("each", curSum);
-//    result.push(curSum);
-// }
-
-// console.log("result!!", result);
+var result = [];
+var curSum = {};
+for (let i=0; i<SELen; i++) {
+   console.log("before", curSum);
+   curSum.item = deepClone(merge(curSum, sortedEvents[i], sortedEvents[i]["se"])).item;
+   curSum.time = sortedEvents[i].time;
+   console.log("each", curSum);
+   result.push(deepClone(curSum));
+}
+console.log("result!!", result);
 
 // console.log(sortedEvents);
 // console.log(
@@ -118,7 +117,14 @@ function merge (i, j, addOrDelete) {
       // if (i["item"].hasOwnProperty(key)) {
          // i.item[key] += j.item[key];
          if (addOrDelete) {
-            i["item"][key] = (i["item"][key] || 0) + j["item"][key];
+            if (i["item"].hasOwnProperty(key)) {
+               i["item"][key] = (i["item"][key] || 0) + j["item"][key];
+            }
+            else {
+               i["item"][key] = 0;
+               i["item"][key] = j["item"][key];
+            }
+
          }
          else {
             i["item"][key] = (i["item"][key] || 0) - j["item"][key];
