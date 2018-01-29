@@ -57,3 +57,37 @@ var threeSum = function(nums) {
         return ans3;
     }
 };
+
+
+// FAILED
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+    nums = nums.sort();
+    if (nums.length < 3) return [];
+    var i, j, result = new Set(), helper;
+    for (i=0; i<nums.length-2; i++) {
+        helper = twoSum((i+1), -nums[i], nums);
+        // console.log(helper);
+        for (j=0; j<helper.length; j++) {
+            result.add(JSON.stringify([nums[i], helper[j][0], helper[j][1]]));
+        }
+    }
+
+    var output = [];
+    for (i of result) {
+        output.push(JSON.parse(i));
+    }
+    return output;
+};
+
+function twoSum (start, sum, nums) {
+    var hash = {}, i, twoSumResult = [];
+    for (i=start; i<nums.length; i++) {
+        if (hash[sum-nums[i]]) twoSumResult.push([nums[i], sum-nums[i]].sort());
+        else hash[nums[i]] = i;
+    }
+    return twoSumResult;
+}
