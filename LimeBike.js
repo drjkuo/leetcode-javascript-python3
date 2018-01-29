@@ -56,7 +56,6 @@ function process_ride(ride) {
          item: deepClone(ride[i].item)
       });
       sortedEvents.push(tmp);
-      // tmp = {};
    }
    return sortedEvents;
 }
