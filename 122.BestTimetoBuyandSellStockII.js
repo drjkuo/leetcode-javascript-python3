@@ -13,3 +13,15 @@ var maxProfit = function(prices) {
 
     return ans;
 };
+
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    var result = 0;
+    for(var i=0; i<prices.length; i++) {
+        if (i>0 && prices[i]>prices[i-1]) result += (prices[i]-prices[i-1]);
+    }
+    return result;
+};
