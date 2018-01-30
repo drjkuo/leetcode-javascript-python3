@@ -14,3 +14,24 @@ var moveZeroes = function(nums) {
     }
     return;
 };
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+    var nonzerolen = 0, i;
+    for (i=0; i<nums.length; i++) {
+        if (nums[i] !== 0) {
+          nums[nonzerolen] = nums[i];
+          nonzerolen+=1;
+        }
+    }
+
+    while (nonzerolen < nums.length) {
+        nums[nonzerolen] = 0;
+        nonzerolen += 1;
+    }
+
+    return;
+};
