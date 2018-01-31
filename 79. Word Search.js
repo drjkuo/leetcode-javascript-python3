@@ -40,3 +40,49 @@ var exist = function(board, word) {
     }
 
 };
+
+
+/**
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+var exist = function(board, word) {
+    var rowlen = board.length;
+    var collen = board[0].length;
+    var visited = [];
+    var i,j;
+    for (i=0; i<rowlen; i++) {
+        visited.push([]);
+        for (j=0; j<collen; j++) {
+            visited[i].push(false);
+        }
+    }
+
+    for (i=0; i<rowlen; i++) {
+        for (j=0; j<collen; j++) {
+            if (DFS(word, 0, board, i, j, visited)) return true;
+        }
+    }
+    return false;
+
+};
+
+function DFS (w, wpos, board, brow, bcol, visited) {
+    // console.log(brow, bcol);
+    var rowlen = board.length;
+    var collen = board[0].length;
+    var wlen = w.length;
+    if (wpos === wlen) return true;
+
+    if (brow === -1 || brow === rowlen ||
+        bcol === -1 || bcol === collen || visited[brow][bcol] === true ||       w[wpos] !== board[brow][bcol])
+        return false;
+    visited[brow][bcol] = true;
+    var flag = (DFS(w, wpos+1, board, brow+1, bcol, visited)) ||
+        (DFS(w, wpos+1, board, brow-1, bcol, visited)) ||
+        (DFS(w, wpos+1, board, brow, bcol+1, visited)) ||
+        (DFS(w, wpos+1, board, brow, bcol-1, visited));
+    visited[brow][bcol] = false;
+    return flag;
+}
