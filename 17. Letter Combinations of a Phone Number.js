@@ -37,3 +37,31 @@ function helper (dic, digits, pos, oneAns, result) {
         pos -= 1;
     }
 }
+
+
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    var arr = [" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
+    var result = [];
+    if (digits.length === 0) return [];
+    helper(result, [], digits, arr, 0);
+    return result;
+
+    function helper(result, oneAns, digits, arr, pos) {
+        if (pos === digits.length) {
+            result.push(oneAns.slice().join(""));
+            return;
+        }
+
+        for(var i=0; i<arr[digits[pos]].length; i++) {
+            oneAns.push(arr[digits[pos]][i]);
+            helper(result, oneAns, digits, arr, pos+1);
+            oneAns.pop();
+        }
+
+    }
+
+};
