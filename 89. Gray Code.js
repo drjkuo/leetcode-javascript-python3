@@ -15,3 +15,19 @@ var grayCode = function(n) {
     return ans;
 
 };
+
+
+/**
+ * @param {number} n
+ * @return {number[]}
+ */
+
+// G(i) = i XOR (i/2)
+
+var grayCode = function(n) {
+    var result = [];
+    for (var i=0; i< (1<<n); i++) {
+        result.push(i ^ (i>>1));
+    }
+    return result;
+};
