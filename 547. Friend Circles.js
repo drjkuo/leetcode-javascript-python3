@@ -41,7 +41,7 @@ class Solution {
 // Java
 class Solution {
     public int p[];
-    
+
     public int find(int x) {
         if (x != p[x]) p[x] = find(p[x]);
         return p[x];
@@ -79,3 +79,51 @@ class Solution {
     }
 
 }
+
+
+/**
+ * @param {number[][]} M
+ * @return {number}
+ */
+
+var findCircleNum = function(M) {
+    var p = [];
+
+
+    function find(x) {
+        if (x !== p[x]) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    function union(x,y) {
+        var rootx = find(x);
+        var rooty = find(y);
+        if (rootx !== rooty) {
+            p[rooty] = rootx;
+            return true; // unioned
+        }
+        return false; // need not union
+    }
+
+    var len = M.length;
+
+    // initialize p
+    for (var i=0; i<len; i++) p[i] = i;
+
+    // traverse M
+    for (var i=0; i<len; i++) {
+        for (var j=i+1; j<len; j++) {
+            if (M[i][j] === 1) union(i,j);
+            // console.log(p);
+        }
+    }
+
+    var s = new Set();
+    for (var i=0; i<len; i++) s.add(find(i));
+
+    return s.size;
+
+
+};
