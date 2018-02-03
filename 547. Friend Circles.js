@@ -37,3 +37,45 @@ class Solution {
     }
 
 }
+
+// Java
+class Solution {
+    public int p[];
+    
+    public int find(int x) {
+        if (x != p[x]) p[x] = find(p[x]);
+        return p[x];
+    }
+
+    public void union(int x, int y) {
+        int rootx = find(x);
+        int rooty = find(y);
+        if (rootx != rooty) {
+            p[rooty] = rootx;
+        }
+    }
+
+    public int findCircleNum(int[][] M) {
+
+        int rowNum = M.length;
+
+        p = new int[rowNum];
+
+        for(int i=0; i<rowNum; i++) p[i] = i;
+
+        for(int i=0; i<rowNum; i++) {
+            for(int j=i+1; j<rowNum; j++) {
+
+                if (M[i][j] == 1) {
+                    union(i, j);
+                }
+            }
+        }
+
+        Set<Integer> s = new HashSet<Integer>();
+        for(int i=0; i<rowNum; i++) s.add(find(i));
+
+        return s.size();
+    }
+
+}
