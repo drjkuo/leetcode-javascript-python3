@@ -32,9 +32,6 @@ function helper (result, oneAns, pos, s, part) {
   var segment;
   for (var i=0; i<4; i++) {
     segment = s.substring(pos, pos+i+1);
-    // segment = parseInt(segment);
-
-    // if (segment >= 0 && segment <=255) {
     if (isValid(segment)) {
       oneAns.push(segment);
       helper(result, oneAns, pos+i+1, s, part+1);
