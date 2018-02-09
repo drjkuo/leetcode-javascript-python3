@@ -41,3 +41,43 @@ function helper (root) {
         return;
     }
 }
+
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+    if (root === null) return;
+
+    if (root.left && root.right) {
+        var tmp = root.right;
+        root.right = root.left;
+        root.left = tmp;
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
+
+    if (root.left) {
+        root.right = root.left;
+        root.left = null;
+        invertTree(root.right);
+        return root;
+    }
+
+    if (root.right) {
+        root.left = root.right;
+        root.right = null;
+        invertTree(root.left);
+        return root;
+    }
+
+};
