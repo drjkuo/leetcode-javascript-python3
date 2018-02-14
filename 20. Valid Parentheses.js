@@ -44,6 +44,30 @@ class Solution {
         return (stack.size() == 0);
     }
 }
-
-
 */
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    // '(', ')', '{', '}', '[' and ']'
+    var stack = [];
+    for (var i=0; i<s.length; i++) {
+        if ((s[i] === '(') || (s[i] === '{') || (s[i] === '['))
+            stack.push(s[i]);
+        else {
+            if (s[i] === ')') {
+                if (stack.pop() !== '(') return false;
+            }
+            if (s[i] === '}') {
+                if (stack.pop() !== '{') return false;
+            }
+            if (s[i] === ']') {
+                if (stack.pop() !== '[') return false;
+            }
+        }
+    }
+    return stack.length === 0;
+
+};
