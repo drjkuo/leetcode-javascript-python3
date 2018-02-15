@@ -131,3 +131,44 @@ class UnionFind {
     }
 
 }
+
+
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function(grid) {
+    if (grid.length === 0) return 0;
+    var rowlen = grid.length;
+    var collen = grid[0].length;
+    var i, j;
+    var result = 0;
+
+    for (i=0; i<rowlen; i++) {
+        for (j=0; j<collen; j++) {
+            if (grid[i][j] === '1') {
+                var q = [];
+                result += 1;
+                q.push([i,j]);
+                while (q.length > 0) {
+                    var tmp = q.shift();
+                    var i1 = tmp[0], j1 = tmp[1];
+                    if (i1<0 || i1>rowlen-1 ||
+                        j1<0 || j1>collen-1 ||
+                        grid[i1][j1] === '0')
+                        continue;
+                    else {
+                        grid[i1][j1] = '0';
+                        q.push([i1,j1+1]);
+                        q.push([i1,j1-1]);
+                        q.push([i1+1,j1]);
+                        q.push([i1-1,j1]);
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+
+};
