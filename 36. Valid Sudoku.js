@@ -6,52 +6,25 @@ var isValidSudoku = function(board) {
     var rowLen = board.length;
     var colLen = board[0].length;
 
-    for (var i=0; i<rowLen; i++) {
-        var tmp = [];
-        for (var j=0; j<colLen; j++) {
-            tmp.push(parseInt(board[i][j]));
-        }
-        if (!checkValid(tmp)) return false;
-    }
+    var hashRow = {}, hashCol = {}, hashBlock = {};
 
     for (var i=0; i<rowLen; i++) {
-        var tmp = [];
         for (var j=0; j<colLen; j++) {
-            tmp.push(parseInt(board[j][i]));
-        }
-        if (!checkValid(tmp)) return false;
-    }
+            if (board[i][j] !== "." && hashRow[board[i][j]] !== undefined) return false;
+            else hashRow[board[i][j]] = true;
+            if (board[j][i] !== "." && hashCol[board[j][i]] !== undefined) return false;
+            else hashCol[board[j][i]] = true;
 
-    for (var i=0; i<3; i++) {
-        for (var j=0; j<3; j++) {
-            if (!checkValid(makeBlock(i*3, j*3, board))) return false;
+            var rowIndex = 3 * parseInt(i/3), colIndex = 3 * parseInt(i%3);
+            var row = parseInt(rowIndex + j/3);
+            var col = parseInt(colIndex + j%3);
+            if (board[row][col] !== "." && hashBlock[board[row][col]] !== undefined) return false;
+            else hashBlock[board[row][col]] = true;
         }
+        hashRow = {};
+        hashCol = {};
+        hashBlock = {};
     }
-
     return true;
-
 
 };
-
-function checkValid (arr) {
-    var tmp = [];
-    for (var i=0; i<arr.length; i++) {
-        if (arr[i]>9 || arr[i]<1) return false;
-        else if (tmp.indexOf(arr[i]) !== -1) {
-            return false;
-        }
-        else tmp.push(arr[i]);
-    }
-
-    return true;
-}
-
-function makeBlock(x, y, board) {
-    var tmp = [];
-    for (var i=0; i<3; i++) {
-        for (var j=0; j<3; j++) {
-            tmp.push(parseInt(board[i+x][j+y]));
-        }
-    }
-    return tmp;
-}
