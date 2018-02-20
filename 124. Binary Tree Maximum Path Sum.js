@@ -49,7 +49,7 @@ var maxPathSum = function(root) {
         var right = Math.max(0, helper(root.right));
         max = Math.max(max, left+right+root.val);
 
-        return Math.max(...[root.val+left, root.val+right])
+        return Math.max(root.val+left, root.val+right)
 
     }
 };
