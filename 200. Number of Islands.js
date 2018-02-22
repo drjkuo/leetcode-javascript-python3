@@ -172,3 +172,38 @@ var numIslands = function(grid) {
     return result;
 
 };
+
+
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function(grid) {
+    if (grid.length === 0 || grid === null) return 0;
+    var nRow = grid.length;
+    var nCol = grid[0].length;
+    var result = 0;
+
+    for (var i=0; i<nRow; i++) {
+        for (var j=0; j<nCol; j++) {
+            if (grid[i][j] === "1") {
+                result += 1;
+                DFS(grid, i, j);
+            }
+        }
+    }
+
+    return result;
+
+
+
+    function DFS(grid, i, j) {
+        if (i<0 || i>=nRow || j<0 || j>=nCol || grid[i][j] === "0") return;
+
+        grid[i][j] = "0";
+        DFS(grid, i+1, j);
+        DFS(grid, i-1, j);
+        DFS(grid, i, j+1);
+        DFS(grid, i, j-1);
+    }
+};
