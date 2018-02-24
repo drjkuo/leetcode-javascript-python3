@@ -30,3 +30,22 @@ var hammingDistance = function(x, y) {
 
 
 };
+
+
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+var hammingDistance = function(x, y) {
+    if (x<0 || y<0 || typeof x !== "number" || typeof y !== "number") throw new Error("input error");
+
+    var result = 0;
+
+    var z = x^y;
+    for(; z; result++) {
+        z = z & (z-1);
+    }
+    return result;
+
+};
