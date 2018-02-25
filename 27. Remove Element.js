@@ -21,3 +21,23 @@ var removeElement = function(nums, val) {
 
     return newlength;
 };
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    if (nums instanceof Array === false) throw new Error("input error");
+
+    var pt = 0;
+    for (var i=0; i<nums.length; i++) {
+        if (nums[i] !== val) {
+            nums[pt] = nums[i];
+            pt += 1;
+        }
+    }
+
+    return pt;
+};
