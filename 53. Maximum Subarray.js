@@ -35,3 +35,23 @@ var maxSubArray = function(nums) {
 
     return result;
 };
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    if (nums.length === 0) throw new Error("input error");
+    if (nums.length === 1) return nums[0];
+
+    var dp = [], max = -Infinity;
+    dp[0] = nums[0];
+    max = Math.max(max, dp[0]);
+    for (var i=1; i<nums.length; i++) {
+        dp[i] = (dp[i-1]>0)? dp[i-1]+nums[i] : nums[i];
+        max = Math.max(max, dp[i]);
+    }
+
+    return max;
+};
