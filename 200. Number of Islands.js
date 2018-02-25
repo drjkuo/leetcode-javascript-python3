@@ -206,4 +206,43 @@ var numIslands = function(grid) {
         DFS(grid, i, j+1);
         DFS(grid, i, j-1);
     }
-};
+
+
+
+
+
+    /**
+     * @param {character[][]} grid
+     * @return {number}
+     */
+    var numIslands = function(grid) {
+        if (grid.length === 0 || grid === null) return 0;
+
+        var nRow = grid.length;
+        var nCol = grid[0].length;
+        var result = 0;
+
+        for (var i=0; i<nRow; i++) {
+            for (var j=0; j<nCol; j++) {
+                if (grid[i][j] === "1") {
+                    result += 1;
+                    DFS(grid, i, j);
+                }
+            }
+        }
+
+        return result;
+
+
+
+        function DFS(grid, i, j) {
+            if (i<0 || i>nRow-1 || j<0 || j>nCol-1 || grid[i][j] === "0") return;
+
+            grid[i][j] = "0";
+            var di = [1, -1, 0, 0];
+            var dj = [0, 0, 1, -1];
+            for (var k=0; k<4; k++) {
+                DFS(grid, i+di[k], j+dj[k]);
+            }
+        }
+    };
