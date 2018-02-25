@@ -84,3 +84,30 @@ var arrayNesting = function(nums) {
 
     return result;
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var arrayNesting = function(nums) {
+    if (nums === null) throw new Error("input error");
+    if (nums.length === 0) return 0;
+
+    var visited = [];
+    var result = -Infinity;
+
+    for (var i=0; i<nums.length; i++) {
+        if (visited.indexOf(i) !== -1) continue;
+        var start = i;
+        var lengthS = 0;
+        while (nums[start] !== i) {
+            visited.push(start);
+            lengthS += 1;
+            start = nums[start];
+        }
+        lengthS += 1;
+        result = Math.max(result, lengthS);
+    }
+
+    return result;
+};
