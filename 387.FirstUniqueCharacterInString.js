@@ -23,3 +23,27 @@ var firstUniqChar = function(s) {
 
     return -1;
 };
+
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function(s) {
+    var hash = {};
+    for (var i=0; i<s.length; i++) {
+        if (hash[s[i]] === undefined) {
+            hash[s[i]] = i;
+        }
+        else {
+            hash[s[i]] = -1;
+        }
+    }
+
+    for(var i=0; i<s.length; i++) {
+        if (hash[s[i]] !== -1) return i;
+    }
+
+    return -1;
+
+};
