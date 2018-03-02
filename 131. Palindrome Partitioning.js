@@ -74,3 +74,44 @@ function isPalindrome(s) {
     }
     return true;
 }
+
+/**
+ * @param {string} s
+ * @return {string[][]}
+ */
+var partition = function(s) {
+    if (typeof s !== "string") throw new Error("input error");
+    if (s === "") return [[]];
+    var result = [];
+    helper(result, [], 0, s);
+    return result;
+
+
+    function helper(result, oneAns, pos, s) {
+        console.log(oneAns);
+        if (pos === s.length) {
+            result.push(oneAns.slice());
+            return;
+        }
+        if (pos > s.length) return;
+
+        for(var i=pos+1; i<=s.length; i++) {
+            if (isPalindrome(s.substring(pos, i))) {
+                oneAns.push(s.substring(pos, i));
+                helper(result, oneAns, i, s);
+                oneAns.pop();
+            }
+        }
+    }
+
+    function isPalindrome(x) {
+        if (x.length === 0) return true;
+        var p1 = 0, p2 = x.length-1;
+        while (p1<p2) {
+            if (x[p1] !== x[p2]) return false;
+            p1 += 1;
+            p2 -= 1;
+        }
+        return true;
+    }
+};
